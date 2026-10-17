@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alango Ken | ICT Graduate &amp; Web Developer</title>
+<meta name="description" content="Bachelor's ICT graduate building web systems with HTML, CSS, JavaScript and PHP.">
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #f4f6fb;
+    --surface: #ffffff;
+    --ink: #16213e;
+    --muted: #55607a;
+    --line: #d5dae8;
+    --accent: #1f6f8b;
+    --accent-ink: #ffffff;
+    --pane1: #1f6f8b;
+    --pane2: #e0a030;
+    --pane3: #b5465a;
+    --pane4: #3e7d4f;
+    --serif: "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+    --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #11182b;
+      --surface: #1a2340;
+      --ink: #eef1fa;
+      --muted: #a9b3cc;
+      --line: #2c3659;
+      --accent: #6cc3de;
+      --accent-ink: #0c1424;
+      --pane1: #4aa3c2;
+      --pane2: #e8b04a;
+      --pane3: #d8697d;
+      --pane4: #69ad7b;
+    }
+  }
+  * { box-sizing: border-box; margin: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--ink); font: 1.0625rem/1.65 var(--sans); }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+  .wrap { width: min(1040px, 100% - 2.5rem); margin-inline: auto; }
+
+  /* Header */
+  header { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; padding-block: .75rem; }
+  .brand { font: 700 1.25rem var(--serif); text-decoration: none; }
+  nav { display: flex; gap: 1.25rem; flex-wrap: wrap; }
+  nav a { text-decoration: none; color: var(--muted); font-size: .95rem; padding-block: .25rem; border-bottom: 2px solid transparent; }
+  nav a:hover { color: var(--ink); border-color: var(--accent); }
+
+  /* Hero */
+  .hero { padding-block: clamp(3rem, 9vw, 6.5rem); }
+  .hero .wrap { display: grid; grid-template-columns: 1.4fr 1fr; gap: 3rem; align-items: center; }
+  h1 { font: 700 clamp(2.8rem, 8vw, 5.4rem)/1 var(--serif); letter-spacing: -.02em; }
+  .role { margin-top: 1.1rem; font: italic 1.4rem var(--serif); color: var(--muted); }
+  .lede { margin-top: 1.25rem; max-width: 52ch; color: var(--muted); }
+  .cta { display: flex; gap: .75rem; flex-wrap: wrap; margin-top: 2rem; }
+  .btn { display: inline-block; padding: .7rem 1.3rem; border-radius: 6px; font-weight: 600; text-decoration: none; border: 2px solid var(--accent); }
+  .btn.primary { background: var(--accent); color: var(--accent-ink); }
+  .btn.ghost { color: var(--accent); }
+  .btn:hover { filter: brightness(1.1); }
+
+  /* The one memorable thing: a stained-glass arch window */
+  .window { width: min(100%, 300px); margin-inline: auto; aspect-ratio: 3 / 4; border: 6px solid var(--ink); border-radius: 999px 999px 8px 8px; overflow: hidden; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1.1fr 1fr 1fr; gap: 6px; background: var(--ink); }
+  .window i { display: block; opacity: .15; animation: light 900ms ease-out forwards; }
+  .window i:nth-child(1) { background: var(--pane1); grid-column: 1 / 3; animation-delay: 100ms; }
+  .window i:nth-child(2) { background: var(--pane2); animation-delay: 300ms; }
+  .window i:nth-child(3) { background: var(--pane3); animation-delay: 500ms; }
+  .window i:nth-child(4) { background: var(--pane4); animation-delay: 700ms; }
+  .window i:nth-child(5) { background: var(--pane1); animation-delay: 900ms; }
+  .window i:nth-child(6) { background: var(--pane2); grid-column: 1 / 3; animation-delay: 1100ms; }
+  @keyframes light { to { opacity: 1; } }
+  @media (prefers-reduced-motion: reduce) { .window i { animation: none; opacity: 1; } html { scroll-behavior: auto; } }
+
+  /* Sections */
+  section { padding-block: clamp(3rem, 7vw, 5rem); border-top: 1px solid var(--line); scroll-margin-top: 3.5rem; }
+  h2 { font: 700 clamp(1.8rem, 4vw, 2.4rem)/1.15 var(--serif); margin-bottom: 1.75rem; }
+  h3 { font: 700 1.3rem/1.3 var(--serif); }
+  .cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 2rem; }
+  .about p + p { margin-top: 1rem; }
+  .about .text { max-width: 62ch; }
+  .does { display: grid; gap: 1.5rem; }
+  .does h3 { font-size: 1.1rem; margin-bottom: .25rem; }
+  .does p { color: var(--muted); font-size: 1rem; }
+  .about .grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 3rem; }
+
+  .project { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: clamp(1.5rem, 4vw, 2.5rem); display: grid; grid-template-columns: 1.3fr 1fr; gap: 2.5rem; }
+  .project p { color: var(--muted); margin-top: .75rem; max-width: 56ch; }
+  .project ul { margin: 1rem 0 0 1.1rem; color: var(--muted); }
+  .project li + li { margin-top: .3rem; }
+  .tags { display: flex; flex-wrap: wrap; gap: .5rem; list-style: none; padding: 0; margin: 0; }
+  .tags li { border: 1px solid var(--line); border-radius: 999px; padding: .25rem .8rem; font-size: .9rem; color: var(--ink); background: var(--bg); }
+  .stack-label { font-weight: 600; margin-bottom: .75rem; }
+  .next { margin-top: 1.25rem; color: var(--muted); font-size: .98rem; }
+
+  .edu { background: var(--surface); border: 1px solid var(--line); border-left: 6px solid var(--pane2); border-radius: 8px; padding: 1.5rem; max-width: 640px; }
+  .edu .meta { color: var(--muted); margin-top: .25rem; }
+  .empty { color: var(--muted); max-width: 60ch; margin-bottom: 2rem; }
+
+  .skill-group + .skill-group { margin-top: 2rem; }
+  .skill-group h3 { font-size: 1.1rem; margin-bottom: .75rem; }
+
+  form { display: grid; gap: 1rem; max-width: 560px; }
+  label { display: grid; gap: .35rem; font-weight: 600; font-size: .95rem; }
+  input, textarea { font: inherit; padding: .7rem .85rem; border-radius: 6px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); }
+  textarea { min-height: 140px; resize: vertical; }
+  button.btn { cursor: pointer; font: inherit; font-weight: 600; justify-self: start; }
+  .note { color: var(--muted); font-size: .95rem; min-height: 1.5em; }
+
+  footer { border-top: 1px solid var(--line); padding-block: 2rem; color: var(--muted); font-size: .95rem; }
+  footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+
+  @media (max-width: 760px) {
+    .hero .wrap, .about .grid, .project { grid-template-columns: 1fr; }
+    .window { width: 200px; order: -1; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="brand" href="#home">Alango Ken</a>
+    <nav aria-label="Main">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero" id="home" style="border-top:0">
+    <div class="wrap">
+      <div>
+        <h1>Alango Ken</h1>
+        <p class="role">ICT graduate and web developer</p>
+        <p class="lede">I hold a Bachelor's in ICT and build web systems with HTML, CSS, JavaScript and PHP. My main project is a church management system.</p>
+        <div class="cta">
+          <a class="btn primary" href="#contact">Get in touch</a>
+          <a class="btn ghost" href="#projects">See my project</a>
+        </div>
+      </div>
+      <div class="window" role="img" aria-label="Decorative stained-glass window in four colors">
+        <i></i><i></i><i></i><i></i><i></i><i></i>
+      </div>
+    </div>
+  </section>
+
+  <section class="about" id="about">
+    <div class="wrap">
+      <h2>About me</h2>
+      <div class="grid">
+        <div class="text">
+          <p>I'm an ICT graduate who likes turning everyday processes into working software. I build for the web from the ground up: the page structure and styling in HTML and CSS, the behavior in JavaScript, and the server side in PHP.</p>
+          <p>My church system came from a simple question: how can a church keep its records, events and people organized without stacks of paper? I'm using it to practice the full path from idea to a working application.</p>
+        </div>
+        <div class="does">
+          <div>
+            <h3>Front end</h3>
+            <p>Clean, responsive pages built with HTML, CSS and JavaScript.</p>
+          </div>
+          <div>
+            <h3>Back end</h3>
+            <p>Server-side logic with PHP and Python, and data storage in MySQL.</p>
+          </div>
+          <div>
+            <h3>Design and support</h3>
+            <p>Graphic design and virtual assistance alongside my development work.</p>
+          </div>
+          <div>
+            <h3>Systems thinking</h3>
+            <p>Turning a real organization's needs into screens and workflows people can use.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="wrap">
+      <h2>Featured project</h2>
+      <article class="project">
+        <div>
+          <h3>Church System</h3>
+          <p>A web-based system that helps a church manage its day-to-day work in one place, replacing paper records and scattered spreadsheets.</p>
+          <ul>
+            <li>Member records and groups</li>
+            <li>Attendance tracking</li>
+            <li>Events and announcements</li>
+            <li>Offerings and giving records</li>
+          </ul>
+        </div>
+        <div>
+          <p class="stack-label">Built with</p>
+          <ul class="tags">
+            <li>HTML</li>
+            <li>CSS</li>
+            <li>JavaScript</li>
+            <li>PHP</li>
+          </ul>
+        </div>
+      </article>
+      <p class="next">More projects will be added here as I build them.</p>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="wrap">
+      <h2>Experience and education</h2>
+      <p class="empty">Work experience will appear here once I add it. For now, my degree and the church system are where I'm building real skills.</p>
+      <div class="edu">
+        <h3>Bachelor's in Information and Communication Technology</h3>
+        <p class="meta">Open University of Kenya (OUK) &middot; Graduate</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="wrap">
+      <h2>Technical skills</h2>
+      <div class="skill-group">
+        <h3>Front end</h3>
+        <ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
+      </div>
+      <div class="skill-group">
+        <h3>Back end</h3>
+        <ul class="tags"><li>PHP</li><li>Python</li></ul>
+      </div>
+      <div class="skill-group">
+        <h3>Databases</h3>
+        <ul class="tags"><li>MySQL</li></ul>
+      </div>
+      <div class="skill-group">
+        <h3>Design and support</h3>
+        <ul class="tags"><li>Graphic design</li><li>Virtual assistance</li></ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <h2>Get in touch</h2>
+      <p class="empty">Have a project, an idea or an opportunity? Send me a message and I'll reply.</p>
+      <form id="contactForm">
+        <label>Name <input name="name" autocomplete="name" required></label>
+        <label>Email <input name="email" type="email" autocomplete="email" required></label>
+        <label>Message <textarea name="message" required></textarea></label>
+        <button class="btn primary" type="submit">Send message</button>
+        <p class="note" id="formNote" role="status"></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>&copy; <span id="year">2026</span> Alango Ken. All rights reserved.</span>
+    <span>Built with HTML, CSS, JavaScript and PHP</span>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const MY_EMAIL = 'kenntechie0@gmail.com';
+
+  document.getElementById('contactForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    const f = new FormData(this);
+    const subject = encodeURIComponent('Portfolio message from ' + f.get('name'));
+    const body = encodeURIComponent(f.get('message') + '\n\nFrom: ' + f.get('name') + ' (' + f.get('email') + ')');
+    window.location.href = 'mailto:' + MY_EMAIL + '?subject=' + subject + '&body=' + body;
+    document.getElementById('formNote').textContent = 'Opening your email app to send the message.';
+  });
+</script>
+</body>
+</html>
